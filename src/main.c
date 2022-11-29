@@ -10,6 +10,7 @@
 
 #include "HTTP_Server.h"
 #include "Routes.h"
+#include "Response.h"
 
 int main() {
 	// initiate HTTP_Server
@@ -63,25 +64,24 @@ int main() {
 		printf("The method is %s\n", method);
 		printf("The route is %s\n", urlRoute);
 
-		struct Route * destination = search(route, urlRoute);
+
+		char template[100] = "";
 		
-		char template[100] = "templates/";
-
-		if (destination == NULL) {
-			strcat(template, "404.html");
+		if (strstr(urlRoute, "/static/") != NULL) {
+			//strcat(template, urlRoute+1);
+			strcat(template, "static/index.css");
 		}else {
-			strcat(template, destination->value);
+			struct Route * destination = search(route, urlRoute);
+			strcat(template, "templates/");
+
+			if (destination == NULL) {
+				strcat(template, "404.html");
+			}else {
+				strcat(template, destination->value);
+			}
 		}
 
-		FILE *html_data = fopen(template, "r");
-
-		if (html_data == NULL) {
-			printf("Cant open file no: %d \n", errno);
-		}
-	
-		char response_data[2048] = "";
-
-		fgets(response_data, 2048, html_data);
+		char * response_data = render_static_file(template);
 
 		char http_header[4096] = "HTTP/1.1 200 OK\r\n\r\n";
 
@@ -91,8 +91,7 @@ int main() {
 
 		send(client_socket, http_header, sizeof(http_header), 0);
 		close(client_socket);
-
-		fclose(html_data);	
+		free(response_data);
 	}
 	return 0;
 }

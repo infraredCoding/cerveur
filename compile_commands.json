@@ -1,0 +1,41 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "src/HTTP_Server.o",
+      "src/HTTP_Server.c"
+    ],
+    "directory": "/home/infraredCoding/workspace/websockets",
+    "file": "/home/infraredCoding/workspace/websockets/src/HTTP_Server.c",
+    "output": "/home/infraredCoding/workspace/websockets/src/HTTP_Server.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "src/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/infraredCoding/workspace/websockets",
+    "file": "/home/infraredCoding/workspace/websockets/src/main.c",
+    "output": "/home/infraredCoding/workspace/websockets/src/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "src/Routes.o",
+      "src/Routes.c"
+    ],
+    "directory": "/home/infraredCoding/workspace/websockets",
+    "file": "/home/infraredCoding/workspace/websockets/src/Routes.c",
+    "output": "/home/infraredCoding/workspace/websockets/src/Routes.o"
+  }
+]
