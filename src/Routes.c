@@ -39,17 +39,17 @@ struct Route * addRoute(struct Route * root, char* key, char* value) {
 }
 
 struct Route * search(struct Route * root, char* key) {
-	if (root == NULL) {
-		return NULL;
-	} 
-
-	if (strcmp(key, root->key) == 0){
-		return root;
-	}else if (strcmp(key, root->key) > 0) {
-		return search(root->right, key);
-	}else if (strcmp(key, root->key) < 0) {
-		return search(root->left, key);
-	}  
-
+	struct Route *selected=root;
+	while (selected != NULL) {
+	if (strcmp(key, selected->key) == 0) {
+		return selected;
+	}
+	else if (strcmp(key, selected->key) > 0) {
+		selected=selected->right;
+	}else if (strcmp(key, selected->key) < 0) {
+		selected=selected->left;
+		}  
+	}
+	return NULL;
 }
 
