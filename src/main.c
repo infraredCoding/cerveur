@@ -12,10 +12,24 @@
 #include "Routes.h"
 #include "Response.h"
 
-int main() {
+int main(int argc , char **argv) {
+
+    //! Argument  handler  
+    HTTP_Argparser  http_argp   = {
+        .port       = DFAULT_PORT  , 
+        .listen_blog= LISTEN_BACKLOG , 
+        false
+    } ; 
+
+    argument_parser(argc , argv ,  &http_argp ) ;  
+    
+
 	// initiate HTTP_Server
 	HTTP_Server http_server;
-	init_server(&http_server, 6969);
+    
+    //! on   NULL  the default port is 6969  
+     
+	init_server(&http_server, &http_argp.port);
 
 	int client_socket;
 	
