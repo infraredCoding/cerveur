@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <stdbool.h> 
 #include <netinet/in.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -95,7 +96,8 @@ int main(int argc , char **argv) {
 			}
 		}
 
-		char * response_data = render_static_file(template);
+		char * response_data = render_static_file(template , true);
+        
 
 		char http_header[4096] = "HTTP/1.1 200 OK\r\n\r\n";
 
@@ -107,5 +109,7 @@ int main(int argc , char **argv) {
 		close(client_socket);
 		free(response_data);
 	}
+
+    shutdown(http_server.socket , SHUT_RDWR) ; 
 	return 0;
 }

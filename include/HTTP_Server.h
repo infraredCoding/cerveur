@@ -11,22 +11,18 @@
 typedef struct  sockaddr sockaddr  ;  
 #define SA  sockaddr 
 
+#include <stdbool.h> 
 
 typedef struct HTTP_Server {
 	int socket;
 	int port;	
 } HTTP_Server;
 
-typedef enum  { 
-    false  , 
-    true , 
-}Bool; 
-
 
 typedef struct  {  
      int port ;  
      int listen_blog   ;  
-     Bool  show_available_routes ; 
+     _Bool  show_available_routes ; 
 } HTTP_Argparser ; 
 
 
