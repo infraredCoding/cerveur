@@ -88,7 +88,10 @@ struct Parameter * paramGet(
 	if (!params->is_sorted)
 		paramSort(params);
 
-	return bsearch(key, params->parameters, params->n_members, sizeof(struct Parameter), &key_cmp);
+	struct Parameter search_key;
+	search_key.key = (char*)key; // try to silent warning about losing const-ness
+	
+	return bsearch(&search_key, params->parameters, params->n_members, sizeof(struct Parameter), &key_cmp);
 
 }
 

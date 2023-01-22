@@ -18,7 +18,23 @@ int main()
 		printf("KEY: %s\n", params->parameters[i].key);
 		printf("VALUE: %s\n\n", params->parameters[i].value);
 	}
-	printf("CLEANED URL: %s\n", url);
+	printf("CLEANED URL: %s\n\n", url);
+
+	struct Parameter* search = NULL;
+
+	printf("SEARCH KEY: name\n");
+	search = paramGet(params, "name");
+	printf("FOUND VALUE: %s\n\n", search->value);
+
+	printf("SEARCH KEY: val\n");
+	search = paramGet(params, "val");
+	printf("FOUND VALUE: %s\n\n", search->value);
+
+	printf("SEARCH KEY: xyz\n");
+	search = paramGet(params, "xyz");
+	if (!search)
+		printf("KEY DOESN'T EXIST\n\n");
+
 	paramFree(params);
 	free(url);
 	return 0;
