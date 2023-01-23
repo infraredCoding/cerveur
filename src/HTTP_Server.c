@@ -10,7 +10,7 @@ const char _status_code_text[8][50] = {
 	"HTTP/1.1 400 Bad request\r\n\r\n",
 	"HTTP/1.1 401 Unauthorized\r\n\r\n",
 	"HTTP/1.1 403 Forbidden\r\n\r\n",
-	"HTTP/1.1 401 Not found\r\n\r\n",
+	"HTTP/1.1 404 Not found\r\n\r\n",
 	"HTTP/1.1 500 Internal Error\r\n\r\n",
 	"HTTP/1.1 501 Not implemented\r\n\r\n"
 };
