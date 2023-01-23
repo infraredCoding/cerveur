@@ -21,7 +21,9 @@ int main() {
 	
 	// registering Routes
 	struct Route * route = initRoute("/", "index.html"); 
-	addRoute(route, "/about", "about.html");
+	addRoute(&route, "/about", "about.html");
+	addRoute(&route, "/sth", "sth.html");
+	addRoute(&route, "/chicken", "chicken.html");
 
 
 	printf("\n====================================\n");

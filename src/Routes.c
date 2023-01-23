@@ -23,18 +23,17 @@ void inorder(struct Route* root)
     }
 }
 
-struct Route * addRoute(struct Route * root, char* key, char* value) {
-	if (root == NULL) {
-		return initRoute(key, value);
+void addRoute(struct Route ** root, char* key, char* value) {
+	if (*root == NULL) {
+		*root = initRoute(key, value);
 	}
-
-	if (strcmp(key, root->key) == 0) {
+	else if (strcmp(key, (*root)->key) == 0) {
 		printf("============ WARNING ============\n");
 		printf("A Route For \"%s\" Already Exists\n", key);
-	}else if (strcmp(key, root->key) > 0) {
-		root->right = addRoute(root->right, key, value);
+	}else if (strcmp(key, (*root)->key) > 0) {
+		addRoute(&(*root)->right, key, value);
 	}else {
-		root->left = addRoute(root->left, key, value);
+		addRoute(&(*root)->left, key, value);
 	}
 }
 
