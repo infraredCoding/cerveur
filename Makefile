@@ -8,10 +8,10 @@ flags = -g -Wall -lm -ldl -fPIC -rdynamic -I./include
 # flags = -I./include
 
 $(exec): $(objects)
-	gcc $(objects) $(flags) -o $(exec)
+	$(CC) $(objects) $(flags) -o $(exec)
 
 %.o: %.c %.h
-	gcc -c $(flags) $< -o $@
+	$(CC) -c $(flags) $< -o $@
 
 
 clean:
