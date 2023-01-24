@@ -25,7 +25,7 @@ int main() {
 
 
 	printf("\n====================================\n");
-	printf("=========ALL VAILABLE ROUTES========\n");
+	printf("=========ALL AVAILABLE ROUTES========\n");
 	// display all available routes
 	inorder(route);
 
@@ -70,26 +70,24 @@ int main() {
 		if (strstr(urlRoute, "/static/") != NULL) {
 			//strcat(template, urlRoute+1);
 			strcat(template, "static/index.css");
+			http_set_status_code(&http_server, OK);
 		}else {
 			struct Route * destination = search(route, urlRoute);
 			strcat(template, "templates/");
 
 			if (destination == NULL) {
 				strcat(template, "404.html");
+				http_set_status_code(&http_server, NOT_FOUND);
 			}else {
 				strcat(template, destination->value);
+				http_set_status_code(&http_server, OK);
 			}
 		}
 
 		char * response_data = render_static_file(template);
+		http_set_response_body(&http_server, response_data);
 
-		char http_header[4096] = "HTTP/1.1 200 OK\r\n\r\n";
-
-		strcat(http_header, response_data);
-		strcat(http_header, "\r\n\r\n");
-
-
-		send(client_socket, http_header, sizeof(http_header), 0);
+		send(client_socket, http_server.response, sizeof(http_server.response), 0);
 		close(client_socket);
 		free(response_data);
 	}
