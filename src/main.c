@@ -11,6 +11,7 @@
 #include "HTTP_Server.h"
 #include "Routes.h"
 #include "Response.h"
+#include "Parameters.h"
 
 int main() {
 	// initiate HTTP_Server
@@ -23,9 +24,12 @@ int main() {
 	struct Route * route = initRoute("/", "index.html"); 
 	addRoute(route, "/about", "about.html");
 
+	// create dynamic parameters array
+	struct ParameterArray * params = paramInit(10);
+
 
 	printf("\n====================================\n");
-	printf("=========ALL VAILABLE ROUTES========\n");
+	printf("=========ALL AVAILABLE ROUTES========\n");
 	// display all available routes
 	inorder(route);
 
@@ -63,6 +67,21 @@ int main() {
 
 		printf("The method is %s\n", method);
 		printf("The route is %s\n", urlRoute);
+
+		if (strlen(urlRoute) > 0)
+		{
+			paramParse(params, urlRoute);
+
+			printf("*** PARSED PARAMETERS ***\n");
+			for (size_t i = 0; i < params->n_members; ++i)
+			{
+				printf("KEY: %s\n", params->parameters[i].key);
+				printf("VALUE: %s\n\n", params->parameters[i].value);
+			}
+			// do something with parameters and can clear them to re-use for the next
+			// request
+			paramClear(params);
+		}
 
 
 		char template[100] = "";
