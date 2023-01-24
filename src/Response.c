@@ -23,6 +23,7 @@ char * render_static_file(char * fileName) {
 		temp[i] = ch;
 		i++;
 	}
+	temp[i] = '\0';
 	fclose(file);
 	return temp;
 }
