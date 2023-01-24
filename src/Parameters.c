@@ -148,6 +148,7 @@ void paramParse(
 	}
 
 	paramAdd(params, key, value);
+	free(url_copy);
 }
 
 void paramClear(struct ParameterArray * params)
@@ -167,6 +168,8 @@ void paramClear(struct ParameterArray * params)
 void paramFree(struct ParameterArray * params)
 {
 	paramClear(params);
+	free(params->parameters);
+	params->parameters = NULL;
 	free(params);
 	params = NULL;
 }
